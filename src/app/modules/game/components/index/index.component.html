@@ -1,0 +1,71 @@
+<mat-toolbar class="nav" color="primary">
+  <mat-toolbar-row>
+    <span>Finder Game</span>
+    <span class="spacer"></span>
+    <mat-icon class="icon" routerLink="/">arrow_back</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="component">
+  <mat-card class="question">{{ quetion?.queston }}</mat-card>
+  <div class="anwsers">
+    <app-anwser
+      *ngFor="let option of quetion?.options"
+      [option]="option"
+      (result)="onResult($event)"
+    ></app-anwser>
+  </div>
+</div>
+<div *ngIf="result" class="selection">
+
+</div>
+<style>
+  .selection {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    z-index: 33;
+    opacity: 0.1;
+  }
+  .question {
+    text-align: center;
+    height: 15%;
+    font-size: 24pt;
+    font-weight: bold;
+  }
+  .anwsers {
+    padding: 1em;
+  }
+  .newUser {
+    text-align: center;
+  }
+  .nav {
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+  }
+  .title {
+    text-transform: capitalize;
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+  .clearIcon {
+    color: gray;
+    font-size: 12pt;
+    width: auto;
+    height: auto;
+  }
+
+  .example {
+    font-style: italic;
+    color: gray;
+  }
+
+  .icon {
+    padding-left: 1em;
+  }
+</style>

@@ -1,0 +1,20 @@
+<p *ngIf="!editorWord">
+    - '{{ example }}' <mat-icon *ngIf="edit"  (click)="editorWord = true">create</mat-icon>
+  </p>
+  <mat-form-field class="input" *ngIf="editorWord && edit">
+    <input matInput placeholder="Edit" [(ngModel)]="example" />
+    <button
+      mat-button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="save()"
+    >
+      <mat-icon>done</mat-icon>
+    </button>
+  </mat-form-field>
+  <style>
+    .input {
+      width: 100%;
+    }
+  </style>

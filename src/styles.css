@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.margin {
+  margin-top: 10vh;
+}
+
+mat-toolbar-row {
+  max-width: 500px;
+  margin: auto;
+}
+
+.component {
+  margin: 10vh auto 0 auto;
+  max-width: 500px;
+  padding: 1em;
+}

@@ -1,0 +1,15 @@
+<div *ngFor="let example of _examples">
+  <app-example-editor class="example" [example]="example" [edit]="edit"></app-example-editor>
+</div>
+<button
+  *ngIf="addButton && edit"
+  mat-button
+  mat-icon-button
+  aria-label="Clear"
+  (click)="newExample()"
+>
+  <mat-icon>add</mat-icon>
+</button>
+<style>
+
+</style>

@@ -1,0 +1,98 @@
+<mat-toolbar class="nav" color="primary">
+  <mat-toolbar-row>
+    <span>Finder</span>
+    <span class="spacer"></span>
+    <mat-icon class="icon" *ngIf="words.length >= 5" routerLink="/game">
+      videogame_asset
+    </mat-icon>
+    <mat-icon class="icon" (click)="showDelete = showDelete ? false : true">{{
+      showDelete ? "delete_outline" : "delete"
+    }}</mat-icon>
+    <mat-icon class="icon" routerLink="/search">search</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="component">
+  <mat-accordion *ngIf="words.length !== 0">
+    <mat-expansion-panel *ngFor="let result of words">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          <h2>
+            {{ result.word }}
+            <span *ngIf="result.pronunciation" class="span"
+              >/ {{ result.pronunciation?.all }} /</span
+            >
+          </h2>
+          <span class="spacer"></span>
+          <mat-icon
+            style="margin:auto;"
+            *ngIf="showDelete"
+            (click)="removeWord(result)"
+            >clear</mat-icon
+          >
+        </mat-panel-title>
+        <!-- <mat-panel-description></mat-panel-description> -->
+      </mat-expansion-panel-header>
+      <div *ngFor="let definition of result?.results">
+        <p class="definition">
+          {{ definition?.definition }}
+          <span *ngIf="definition.partOfSpeech">
+            ({{ definition.partOfSpeech }})
+          </span>
+        </p>
+        <!-- [edit]="showDelete" -->
+        <p class="example" *ngFor="let example of definition.examples">
+          - '{{ example }}'
+        </p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div *ngIf="words.length === 0">
+    <mat-card class="newUser">
+      <h3>Ooops! You don't have any saved word</h3>
+      <button mat-button routerLink="/search" color="primary">
+        Let's get started
+      </button>
+    </mat-card>
+  </div>
+</div>
+<style>
+  .newUser {
+    text-align: center;
+  }
+  .nav {
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+  }
+  .title {
+    text-transform: capitalize;
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+  .clearIcon {
+    color: gray;
+    font-size: 12pt;
+    width: auto;
+    height: auto;
+  }
+
+  .example {
+    font-style: italic;
+    color: gray;
+  }
+
+  .icon {
+    padding-left: 1em;
+  }
+  .span {
+    font-size: 0.7em;
+    font-weight: normal;
+    color: lightseagreen;
+  }
+  .definition {
+    font-size: 1em;
+    font-weight: bold;
+  }
+</style>

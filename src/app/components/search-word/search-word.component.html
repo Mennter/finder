@@ -1,0 +1,135 @@
+<mat-toolbar class="nav" color="primary">
+  <mat-toolbar-row>
+    <span>Finder</span>
+    <span class="spacer"></span>
+    <mat-icon routerLink="/">arrow_back</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="component">
+  <div class="header">
+    <mat-form-field class="searcher">
+      <input
+        type="text"
+        [(ngModel)]="word"
+        (keyup.enter)="findWord()"
+        matInput
+        placeholder="Search"
+      />
+      <mat-icon *ngIf="word.length !== 0" (click)="clearInput()" matSuffix
+        >close</mat-icon
+      >
+      <mat-icon *ngIf="word.length === 0" matSuffix>search</mat-icon>
+    </mat-form-field>
+    <span class="spacer"></span>
+    <button
+      class="button"
+      (click)="findWord()"
+      [disabled]="word.length === 0"
+      mat-raised-button
+      color="primary"
+    >
+      Find
+    </button>
+  </div>
+  <div class="body">
+    <mat-card class="result" *ngIf="result">
+      <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title class="title"
+          >{{ result?.word }}
+          <span class="span" *ngIf="result.pronunciation"
+            >/ {{ result.pronunciation?.all }} /</span
+          ></mat-card-title
+        >
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngFor="let definition of result?.results">
+          <p class="definition">
+            {{ definition?.definition }}
+            <span *ngIf="definition.partOfSpeech">
+              ({{ definition.partOfSpeech }})
+            </span>
+          </p>
+          <p class="example" *ngFor="let example of definition.examples">
+            - '{{ example }}'
+          </p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          style="width: 100%;"
+          (click)="saveWord(result)"
+          mat-raised-button
+        >
+          Save word
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <div *ngIf="loading">
+      <mat-spinner class="loading"></mat-spinner>
+      <h3 class="loading-text">Loading...</h3>
+    </div>
+    <mat-card *ngIf="message" class="message">
+      <mat-icon class="icon">{{ message.icon }}</mat-icon>
+      <p>{{ message.description }}</p>
+    </mat-card>
+  </div>
+</div>
+<style>
+  .loading {
+    margin: auto;
+  }
+  .message {
+    text-align: center;
+  }
+  .icon {
+    font-size: 70pt;
+    width: auto;
+    height: auto;
+  }
+  .loading-text {
+    text-align: center;
+  }
+  .nav {
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+  }
+  .button {
+    margin: auto;
+    width: 100%;
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+  .searcher {
+    margin: auto;
+    width: inherit;
+  }
+  .title {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .header {
+    display: inline-grid;
+    grid-template-columns: 72% 3% 25%;
+    width: 100%;
+  }
+
+  .span {
+    font-size: 0.7em;
+    font-weight: normal;
+    color: lightseagreen;
+  }
+
+  .definition {
+    font-size: 1em;
+    font-weight: bold;
+  }
+  .example {
+    font-style: italic;
+    color: gray;
+  }
+</style>

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  key:'1cdc9ee994mshe5a464f00570edfp1809f5jsn4f29d092000e',
+  keyLocalStorage: 'storage'
 };
 
 /*
