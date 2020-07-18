@@ -15,7 +15,7 @@ export class WordService {
   }
 
   getWord(word: string): Observable<Object> {
-    return this.http.get(`https://wordsapiv1.p.mashape.com/words/${word}`, {
+    return this.http.get(`https://wordsapiv1.p.rapidapi.com/words/${word}`, {
       headers: this.headers
     });
   }
