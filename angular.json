@@ -134,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "word-finder"
+  "defaultProject": "word-finder",
+  "cli": {
+    "analytics": false
+  }
 }
