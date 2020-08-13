@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListWordsComponent } from './components/list-words/list-words.component';
 import { SearchWordComponent } from './components/search-word/search-word.component';
 import { WordService } from './services/word.service';
-import { HttpModule } from '@angular/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,7 +32,6 @@ import { GameModule } from './modules/game/game.module';
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpModule,
     MatToolbarModule,
     MatInputModule,
     MatIconModule,

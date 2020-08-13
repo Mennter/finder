@@ -5,9 +5,6 @@ import { CommonModule } from "@angular/common";
 import { GameRoutingModule } from "./game-routing.module";
 import { IndexComponent } from "./components/index/index.component";
 import { FormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpModule } from "@angular/http";
-import { AppRoutingModule } from "src/app/app-routing.module";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatInputModule } from "@angular/material/input";
 import { HttpClientModule } from "@angular/common/http";
@@ -28,7 +25,6 @@ import { AnwserComponent } from './components/anwser/anwser.component';
     CommonModule,
     GameRoutingModule,
     FormsModule,
-    HttpModule,
     MatChipsModule,
     MatToolbarModule,
     MatInputModule,
