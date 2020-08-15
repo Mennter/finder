@@ -1,6 +1,5 @@
 import { WordService } from "./../../../services/word.service";
 import { Injectable } from "@angular/core";
-import { forEach } from "@angular/router/src/utils/collection";
 
 @Injectable({
   providedIn: "root"
