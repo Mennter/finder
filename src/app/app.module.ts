@@ -24,6 +24,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ExampleViewerComponent } from './components/example-viewer/example-viewer.component';
 import { ExampleEditorComponent } from './components/example-editor/example-editor.component';
 import { GameModule } from './modules/game/game.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
   declarations: [AppComponent, ListWordsComponent, SearchWordComponent,  ExampleViewerComponent, ExampleEditorComponent],
@@ -41,6 +43,7 @@ import { GameModule } from './modules/game/game.module';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatSidenavModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

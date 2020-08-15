@@ -1,76 +1,127 @@
-<mat-toolbar class="nav" color="primary">
-  <mat-toolbar-row>
-    <span>Finder</span>
-    <span class="spacer"></span>
-    <mat-icon class="icon" *ngIf="words.length >= 5" routerLink="/game">
-      videogame_asset
-    </mat-icon>
-    <mat-icon class="icon" (click)="showDelete = showDelete ? false : true">{{
-      showDelete ? "delete_outline" : "delete"
-    }}</mat-icon>
-    <mat-icon class="icon" routerLink="/search">search</mat-icon>
-  </mat-toolbar-row>
-</mat-toolbar>
+<mat-drawer-container class="container">
 
-<div class="component">
-  <mat-accordion *ngIf="words.length !== 0">
-    <mat-expansion-panel *ngFor="let result of words">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="title">
-          <h2>
-            {{ result.word }}
-            <span *ngIf="result.pronunciation" class="span"
-              >/ {{ result.pronunciation?.all }} /</span
-            >
-          </h2>
-          <span class="spacer"></span>
-          <mat-icon
-            style="margin:auto;"
-            *ngIf="showDelete"
-            (click)="removeWord(result)"
-            >clear</mat-icon
-          >
-        </mat-panel-title>
-        <!-- <mat-panel-description></mat-panel-description> -->
-      </mat-expansion-panel-header>
-      <div *ngFor="let definition of result?.results">
-        <p class="definition">
-          {{ definition?.definition }}
-          <span *ngIf="definition.partOfSpeech">
-            ({{ definition.partOfSpeech }})
-          </span>
-        </p>
-        <!-- [edit]="showDelete" -->
-        <p class="example" *ngFor="let example of definition.examples">
-          - '{{ example }}'
-        </p>
+  <mat-drawer #drawer class="drawer" mode="push" >
+
+
+    <div style="padding: 10px;">
+      <!-- <button mat-stroked-button *ngIf="words.length >= 5" style="width: 100%;" routerLink="/game">
+        <mat-icon class="icon" class="two-tone"> videogame_asset</mat-icon>
+        Memory game
+      </button> -->
+
+      <p style="text-align: center;">{{versionService.get()}}</p>
+    </div>
+
+  </mat-drawer>
+
+
+  <mat-drawer-content>
+
+    <mat-toolbar class="nav" color="primary">
+      <mat-toolbar-row>
+        <mat-icon class="two-tone" (click)="drawer.toggle()">
+          menu
+        </mat-icon>
+        <span class="spacer"></span>
+        <span>Finder</span>
+        <span class="spacer"></span>
+        <!-- <mat-icon class="icon" *ngIf="words.length >= 5" routerLink="/game">
+        videogame_asset
+      </mat-icon> -->
+        <!-- <mat-icon class="icon" class="two-tone" [ngStyle]="{'color': showDelete ? 'yellow' : 'white'}"
+          (click)="showDelete = showDelete ? false : true">create</mat-icon> -->
+        <mat-icon class="icon" class="two-tone" routerLink="/search">add</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+
+
+    <div class="example-sidenav-content">
+      <div class="component">
+        <div *ngIf="words.length !== 0">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let result of words">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title">
+                  <h2>
+                    {{ result.word }}
+                    <span *ngIf="result.pronunciation" class="span">/ {{ result.pronunciation?.all }} /</span>
+                  </h2>
+                  <span class="spacer"></span>
+                  <mat-icon style="margin:auto;" *ngIf="showDelete" (click)="removeWord(result)">clear</mat-icon>
+                </mat-panel-title>
+                <!-- <mat-panel-description></mat-panel-description> -->
+              </mat-expansion-panel-header>
+              <div *ngFor="let definition of result?.results">
+                <p class="definition">
+                  {{ definition?.definition }}
+                  <span *ngIf="definition.partOfSpeech">
+                    ({{ definition.partOfSpeech }})
+                  </span>
+                </p>
+                <!-- [edit]="showDelete" -->
+                <p class="example" *ngFor="let example of definition.examples">
+                  - '{{ example }}'
+                </p>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <div style="margin: 10px 0;">
+
+            <button mat-stroked-button style="width: 100%;" [ngStyle]="{'color': showDelete ? 'red' : 'black'}"
+              (click)="showDelete = showDelete ? false : true">
+              <mat-icon class="icon" class="two-tone"> create</mat-icon>
+              Edit
+            </button>
+          </div>
+        </div>
+        <div *ngIf="words.length === 0">
+          <mat-card class="newUser">
+            <h3>Ooops! You don't have any saved word</h3>
+            <button mat-button routerLink="/search" color="primary">
+              Let's get started
+            </button>
+          </mat-card>
+        </div>
       </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <div *ngIf="words.length === 0">
-    <mat-card class="newUser">
-      <h3>Ooops! You don't have any saved word</h3>
-      <button mat-button routerLink="/search" color="primary">
-        Let's get started
-      </button>
-    </mat-card>
-  </div>
-</div>
+    </div>
+
+
+  </mat-drawer-content>
+
+
+
+
+
+
+</mat-drawer-container>
+
 <style>
   .newUser {
     text-align: center;
   }
+
   .nav {
     position: fixed;
     top: 0;
     z-index: 2000;
   }
+
   .title {
     text-transform: capitalize;
   }
+
+  .container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
   .spacer {
     flex: 1 1 auto;
   }
+
   .clearIcon {
     color: gray;
     font-size: 12pt;
@@ -86,13 +137,20 @@
   .icon {
     padding-left: 1em;
   }
+
   .span {
     font-size: 0.7em;
     font-weight: normal;
     color: lightseagreen;
   }
+
   .definition {
     font-size: 1em;
     font-weight: bold;
+  }
+
+  .drawer {
+    width: 80vw;
+    max-width: 300px;
   }
 </style>
