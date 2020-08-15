@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { WordService } from 'src/app/services/word.service';
+import { VersionService } from 'src/app/services/version.service'
 import { Word } from 'src/app/clases/word';
 
 @Component({
@@ -15,7 +16,10 @@ export class ListWordsComponent implements OnInit {
   public showDelete = false;
 
 
-  constructor(private wordService: WordService) {}
+  constructor(
+    private wordService: WordService,
+    public versionService: VersionService
+    ) {}
 
   ngOnInit() {
     this.words = this.wordService.getSavedWords();
